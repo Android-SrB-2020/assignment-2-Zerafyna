@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="learn.nbcc.quizapp.MainFragment"
-        android:label="MainFragment" >
+        android:label="Rick and Morty Quiz">
         <action
             android:id="@+id/action_mainFragment_to_cheatFragment"
             app:destination="@id/cheatFragment" />
@@ -16,8 +16,8 @@
     <fragment
         android:id="@+id/cheatFragment"
         android:name="learn.nbcc.quizapp.CheatFragment"
-        android:label="fragment_cheat"
-        tools:layout="@layout/fragment_cheat" >
+        android:label="Cheat?"
+        tools:layout="@layout/fragment_cheat">
         <argument
             android:name="question"
             app:argType="integer" />
@@ -25,4 +25,9 @@
             android:name="answer"
             app:argType="boolean" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="learn.nbcc.quizapp.AboutFragment"
+        android:label="About Rick and Morty"
+        tools:layout="@layout/fragment_about" />
 </navigation>

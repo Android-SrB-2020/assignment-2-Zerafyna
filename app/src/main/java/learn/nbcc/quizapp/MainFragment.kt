@@ -1,11 +1,12 @@
 package learn.nbcc.quizapp
 
-
+/**
+ * @author: Erica Moisei
+ * @date: 09/02/2020
+ */
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import kotlinx.android.synthetic.main.fragment_main.*
 import learn.nbcc.quizapp.databinding.FragmentMainBinding
 import learn.nbcc.therickandmortyquizapp.Question
@@ -63,6 +65,7 @@ class MainFragment : Fragment() {
         binding = DataBindingUtil.inflate(
            inflater, R.layout.fragment_main, container, false
         )
+        setHasOptionsMenu(true)
         return binding.root
     }
 
@@ -99,9 +102,8 @@ class MainFragment : Fragment() {
             }
 
             cheatBtn.setOnClickListener {
-                val question = questionBank[questionIndex].textResId
                 val ans = questionBank[questionIndex].answer
-                navController.navigate(MainFragmentDirections.actionMainFragmentToCheatFragment(question, ans))
+                navController.navigate(MainFragmentDirections.actionMainFragmentToCheatFragment(questionIndex, ans))
             }
         }
     }
@@ -110,6 +112,14 @@ class MainFragment : Fragment() {
         super.onSaveInstanceState(outState)
 
         outState.putInt("qIndex", questionIndex)
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.options_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController()) || super.onOptionsItemSelected(item)
     }
 }
